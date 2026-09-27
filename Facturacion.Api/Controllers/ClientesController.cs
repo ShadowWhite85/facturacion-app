@@ -1,6 +1,7 @@
 using Facturacion.Api.Data;
 using Facturacion.Api.DTOs;
 using Facturacion.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace Facturacion.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ClientesController(FacturacionDbContext db) : ControllerBase
 {
     [HttpGet]

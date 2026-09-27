@@ -1,11 +1,19 @@
 <div class="layout">
-  <nav>
-    <span class="marca">📦 FacturaciónApp</span>
-    <a routerLink="/facturas" routerLinkActive="activo">Facturas</a>
-    <a routerLink="/facturas/nueva" routerLinkActive="activo">Nueva factura</a>
-    <a routerLink="/productos" routerLinkActive="activo">Productos</a>
-    <a routerLink="/clientes" routerLinkActive="activo">Clientes</a>
-  </nav>
+  @if (auth.autenticado()) {
+    <nav>
+      <span class="marca">📦 FacturaciónApp</span>
+      <a routerLink="/facturas" routerLinkActive="activo">Facturas</a>
+      <a routerLink="/facturas/nueva" routerLinkActive="activo">Nueva factura</a>
+      <a routerLink="/productos" routerLinkActive="activo">Productos</a>
+      <a routerLink="/clientes" routerLinkActive="activo">Clientes</a>
+      <span class="espacio"></span>
+      <span class="usuario">
+        {{ auth.usuario()?.nombre }}
+        <span class="rol">{{ auth.usuario()?.rol }}</span>
+      </span>
+      <button (click)="auth.logout()">Salir</button>
+    </nav>
+  }
 
   <main>
     <router-outlet />

@@ -5,6 +5,7 @@ namespace Facturacion.Api.Data;
 
 public class FacturacionDbContext(DbContextOptions<FacturacionDbContext> options) : DbContext(options)
 {
+    public DbSet<Usuario> Usuarios => Set<Usuario>();
     public DbSet<Producto> Productos => Set<Producto>();
     public DbSet<Cliente> Clientes => Set<Cliente>();
     public DbSet<Factura> Facturas => Set<Factura>();
@@ -24,7 +25,16 @@ public class FacturacionDbContext(DbContextOptions<FacturacionDbContext> options
             .HasIndex(f => f.Numero)
             .IsUnique();
 
+        modelBuilder.Entity<Usuario>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
+
         // Datos de demostración realistas (Ecuador)
+        modelBuilder.Entity<Usuario>().HasData(
+            new Usuario { Id = 1, Email = "admin@facturacion.app", Nombre = "Administrador Demo", Rol = RolUsuario.Admin, PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123") },
+            new Usuario { Id = 2, Email = "vendedor@facturacion.app", Nombre = "Vendedor Demo", Rol = RolUsuario.Vendedor, PasswordHash = BCrypt.Net.BCrypt.HashPassword("vendedor123") }
+        );
+
         modelBuilder.Entity<Producto>().HasData(
             new Producto { Id = 1, Codigo = "HW-001", Nombre = "Hot Wheels Nissan Skyline GT-R (BNR34)", Descripcion = "Car Culture - Japan Historics", Precio = 12.50m, Stock = 8 },
             new Producto { Id = 2, Codigo = "HW-002", Nombre = "Hot Wheels '70 Dodge Charger", Descripcion = "Boulevard - STH", Precio = 25.00m, Stock = 3 },

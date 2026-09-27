@@ -1,0 +1,326 @@
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      PRAGMA journal_mode = 'wal';
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Clientes" (
+          "Id" INTEGER NOT NULL CONSTRAINT "PK_Clientes" PRIMARY KEY AUTOINCREMENT,
+          "TipoIdentificacion" INTEGER NOT NULL,
+          "Identificacion" TEXT NOT NULL,
+          "Nombre" TEXT NOT NULL,
+          "Email" TEXT NULL,
+          "Telefono" TEXT NULL,
+          "Direccion" TEXT NULL,
+          "Activo" INTEGER NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Productos" (
+          "Id" INTEGER NOT NULL CONSTRAINT "PK_Productos" PRIMARY KEY AUTOINCREMENT,
+          "Codigo" TEXT NOT NULL,
+          "Nombre" TEXT NOT NULL,
+          "Descripcion" TEXT NULL,
+          "Precio" decimal(18,2) NOT NULL,
+          "PorcentajeIva" decimal(5,2) NOT NULL,
+          "Stock" INTEGER NOT NULL,
+          "Activo" INTEGER NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Usuarios" (
+          "Id" INTEGER NOT NULL CONSTRAINT "PK_Usuarios" PRIMARY KEY AUTOINCREMENT,
+          "Email" TEXT NOT NULL,
+          "Nombre" TEXT NOT NULL,
+          "PasswordHash" TEXT NOT NULL,
+          "Rol" INTEGER NOT NULL,
+          "Activo" INTEGER NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Facturas" (
+          "Id" INTEGER NOT NULL CONSTRAINT "PK_Facturas" PRIMARY KEY AUTOINCREMENT,
+          "Numero" TEXT NOT NULL,
+          "FechaEmision" TEXT NOT NULL,
+          "ClienteId" INTEGER NOT NULL,
+          "Subtotal" decimal(18,2) NOT NULL,
+          "TotalIva" decimal(18,2) NOT NULL,
+          "Total" decimal(18,2) NOT NULL,
+          "Estado" INTEGER NOT NULL,
+          CONSTRAINT "FK_Facturas_Clientes_ClienteId" FOREIGN KEY ("ClienteId") REFERENCES "Clientes" ("Id") ON DELETE CASCADE
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "DetallesFactura" (
+          "Id" INTEGER NOT NULL CONSTRAINT "PK_DetallesFactura" PRIMARY KEY AUTOINCREMENT,
+          "FacturaId" INTEGER NOT NULL,
+          "ProductoId" INTEGER NOT NULL,
+          "Cantidad" INTEGER NOT NULL,
+          "PrecioUnitario" decimal(18,2) NOT NULL,
+          "PorcentajeIva" decimal(5,2) NOT NULL,
+          "Subtotal" decimal(18,2) NOT NULL,
+          CONSTRAINT "FK_DetallesFactura_Facturas_FacturaId" FOREIGN KEY ("FacturaId") REFERENCES "Facturas" ("Id") ON DELETE CASCADE,
+          CONSTRAINT "FK_DetallesFactura_Productos_ProductoId" FOREIGN KEY ("ProductoId") REFERENCES "Productos" ("Id") ON DELETE CASCADE
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Clientes" ("Id", "Activo", "Direccion", "Email", "Identificacion", "Nombre", "Telefono", "TipoIdentificacion")
+      VALUES (1, 1, NULL, NULL, '9999999999999', 'Consumidor Final', NULL, 3);
+      SELECT changes();
+      
+      INSERT INTO "Clientes" ("Id", "Activo", "Direccion", "Email", "Identificacion", "Nombre", "Telefono", "TipoIdentificacion")
+      VALUES (2, 1, 'Av. Daniel León Borja y Chile, Riobamba', 'compras@comercialriobamba.ec', '0601234567001', 'Comercial Riobamba S.A.', '032950123', 1);
+      SELECT changes();
+      
+      INSERT INTO "Clientes" ("Id", "Activo", "Direccion", "Email", "Identificacion", "Nombre", "Telefono", "TipoIdentificacion")
+      VALUES (3, 1, 'Calbay y Primera Constituyente, Riobamba', 'mafe.quizhpi@mail.com', '0603456789', 'María Fernanda Quizhpi', '0987654321', 0);
+      SELECT changes();
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Productos" ("Id", "Activo", "Codigo", "Descripcion", "Nombre", "PorcentajeIva", "Precio", "Stock")
+      VALUES (1, 1, 'HW-001', 'Car Culture - Japan Historics', 'Hot Wheels Nissan Skyline GT-R (BNR34)', '15.0', '12.5', 8);
+      SELECT changes();
+      
+      INSERT INTO "Productos" ("Id", "Activo", "Codigo", "Descripcion", "Nombre", "PorcentajeIva", "Precio", "Stock")
+      VALUES (2, 1, 'HW-002', 'Boulevard - STH', 'Hot Wheels ''70 Dodge Charger', '15.0', '25.0', 3);
+      SELECT changes();
+      
+      INSERT INTO "Productos" ("Id", "Activo", "Codigo", "Descripcion", "Nombre", "PorcentajeIva", "Precio", "Stock")
+      VALUES (3, 1, 'HW-003', 'Premium - Euro Speed', 'Hot Wheels Porsche 911 GT3 RS', '15.0', '9.99', 15);
+      SELECT changes();
+      
+      INSERT INTO "Productos" ("Id", "Activo", "Codigo", "Descripcion", "Nombre", "PorcentajeIva", "Precio", "Stock")
+      VALUES (4, 1, 'SV-001', NULL, 'Servicio de desarrollo de software (hora)', '15.0', '25.0', 999);
+      SELECT changes();
+      
+      INSERT INTO "Productos" ("Id", "Activo", "Codigo", "Descripcion", "Nombre", "PorcentajeIva", "Precio", "Stock")
+      VALUES (5, 1, 'LB-001', NULL, 'Novela digital - Capítulos compilados', '0.0', '4.99', 500);
+      SELECT changes();
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Usuarios" ("Id", "Activo", "Email", "Nombre", "PasswordHash", "Rol")
+      VALUES (1, 1, 'admin@facturacion.app', 'Administrador Demo', '$2a$11$YZlNsQ3D2MLJUh4uJr8bPe2YjRjEy2RS8xOe7JPk/G124EpXvs91u', 1);
+      SELECT changes();
+      
+      INSERT INTO "Usuarios" ("Id", "Activo", "Email", "Nombre", "PasswordHash", "Rol")
+      VALUES (2, 1, 'vendedor@facturacion.app', 'Vendedor Demo', '$2a$11$2geL9TX/ejMXbChFjsjiZ.z/8Zcwoc/D5bVQi6ViIdfUCplk/2lq6', 0);
+      SELECT changes();
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX "IX_Clientes_Identificacion" ON "Clientes" ("Identificacion");
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX "IX_DetallesFactura_FacturaId" ON "DetallesFactura" ("FacturaId");
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX "IX_DetallesFactura_ProductoId" ON "DetallesFactura" ("ProductoId");
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX "IX_Facturas_ClienteId" ON "Facturas" ("ClienteId");
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX "IX_Facturas_Numero" ON "Facturas" ("Numero");
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX "IX_Productos_Codigo" ON "Productos" ("Codigo");
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX "IX_Usuarios_Email" ON "Usuarios" ("Email");
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5059
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\User\Documents\PlanEmprendimientos\FaseA-Portafolio\Facturacion.Api
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@dto_Email='?' (Size = 24)], CommandType='Text', CommandTimeout='30']
+      SELECT "u"."Id", "u"."Activo", "u"."Email", "u"."Nombre", "u"."PasswordHash", "u"."Rol"
+      FROM "Usuarios" AS "u"
+      WHERE "u"."Email" = @dto_Email AND "u"."Activo"
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@dto_Email='?' (Size = 21)], CommandType='Text', CommandTimeout='30']
+      SELECT "u"."Id", "u"."Activo", "u"."Email", "u"."Nombre", "u"."PasswordHash", "u"."Rol"
+      FROM "Usuarios" AS "u"
+      WHERE "u"."Email" = @dto_Email AND "u"."Activo"
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT "f0"."Id", "f0"."ClienteId", "f0"."Estado", "f0"."FechaEmision", "f0"."Numero", "f0"."Subtotal", "f0"."Total", "f0"."TotalIva", "s"."Id", "s"."Cantidad", "s"."FacturaId", "s"."PorcentajeIva", "s"."PrecioUnitario", "s"."ProductoId", "s"."Subtotal", "s"."Id0", "s"."Activo", "s"."Codigo", "s"."Descripcion", "s"."Nombre", "s"."PorcentajeIva0", "s"."Precio", "s"."Stock"
+      FROM (
+          SELECT "f"."Id", "f"."ClienteId", "f"."Estado", "f"."FechaEmision", "f"."Numero", "f"."Subtotal", "f"."Total", "f"."TotalIva"
+          FROM "Facturas" AS "f"
+          WHERE "f"."Id" = @id
+          LIMIT 1
+      ) AS "f0"
+      LEFT JOIN (
+          SELECT "d"."Id", "d"."Cantidad", "d"."FacturaId", "d"."PorcentajeIva", "d"."PrecioUnitario", "d"."ProductoId", "d"."Subtotal", "p"."Id" AS "Id0", "p"."Activo", "p"."Codigo", "p"."Descripcion", "p"."Nombre", "p"."PorcentajeIva" AS "PorcentajeIva0", "p"."Precio", "p"."Stock"
+          FROM "DetallesFactura" AS "d"
+          INNER JOIN "Productos" AS "p" ON "d"."ProductoId" = "p"."Id"
+      ) AS "s" ON "f0"."Id" = "s"."FacturaId"
+      ORDER BY "f0"."Id", "s"."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@dto_Email='?' (Size = 21)], CommandType='Text', CommandTimeout='30']
+      SELECT "u"."Id", "u"."Activo", "u"."Email", "u"."Nombre", "u"."PasswordHash", "u"."Rol"
+      FROM "Usuarios" AS "u"
+      WHERE "u"."Email" = @dto_Email AND "u"."Activo"
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT "c"."Id", "c"."Activo", "c"."Direccion", "c"."Email", "c"."Identificacion", "c"."Nombre", "c"."Telefono", "c"."TipoIdentificacion"
+      FROM "Clientes" AS "c"
+      WHERE "c"."Id" = @p
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@productoIds1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT "p"."Id", "p"."Activo", "p"."Codigo", "p"."Descripcion", "p"."Nombre", "p"."PorcentajeIva", "p"."Precio", "p"."Stock"
+      FROM "Productos" AS "p"
+      WHERE "p"."Id" = @productoIds1 AND "p"."Activo"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "f"."Id"
+      FROM "Facturas" AS "f"
+      ORDER BY "f"."Id" DESC
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (Size = 17), @p4='?' (DbType = Decimal), @p5='?' (DbType = Decimal), @p6='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Facturas" ("ClienteId", "Estado", "FechaEmision", "Numero", "Subtotal", "Total", "TotalIva")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
+      RETURNING "Id";
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      UPDATE "Productos" SET "Stock" = @p0
+      WHERE "Id" = @p1
+      RETURNING 1;
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (DbType = Decimal), @p5='?' (DbType = Decimal), @p6='?' (DbType = Int32), @p7='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "DetallesFactura" ("Cantidad", "FacturaId", "PorcentajeIva", "PrecioUnitario", "ProductoId", "Subtotal")
+      VALUES (@p2, @p3, @p4, @p5, @p6, @p7)
+      RETURNING "Id";
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT "f0"."Id", "f0"."ClienteId", "f0"."Estado", "f0"."FechaEmision", "f0"."Numero", "f0"."Subtotal", "f0"."Total", "f0"."TotalIva", "s"."Id", "s"."Cantidad", "s"."FacturaId", "s"."PorcentajeIva", "s"."PrecioUnitario", "s"."ProductoId", "s"."Subtotal", "s"."Id0", "s"."Activo", "s"."Codigo", "s"."Descripcion", "s"."Nombre", "s"."PorcentajeIva0", "s"."Precio", "s"."Stock"
+      FROM (
+          SELECT "f"."Id", "f"."ClienteId", "f"."Estado", "f"."FechaEmision", "f"."Numero", "f"."Subtotal", "f"."Total", "f"."TotalIva"
+          FROM "Facturas" AS "f"
+          WHERE "f"."Id" = @id
+          LIMIT 1
+      ) AS "f0"
+      LEFT JOIN (
+          SELECT "d"."Id", "d"."Cantidad", "d"."FacturaId", "d"."PorcentajeIva", "d"."PrecioUnitario", "d"."ProductoId", "d"."Subtotal", "p"."Id" AS "Id0", "p"."Activo", "p"."Codigo", "p"."Descripcion", "p"."Nombre", "p"."PorcentajeIva" AS "PorcentajeIva0", "p"."Precio", "p"."Stock"
+          FROM "DetallesFactura" AS "d"
+          INNER JOIN "Productos" AS "p" ON "d"."ProductoId" = "p"."Id"
+      ) AS "s" ON "f0"."Id" = "s"."FacturaId"
+      ORDER BY "f0"."Id", "s"."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      UPDATE "Facturas" SET "Estado" = @p0
+      WHERE "Id" = @p1
+      RETURNING 1;
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      UPDATE "Productos" SET "Stock" = @p0
+      WHERE "Id" = @p1
+      RETURNING 1;
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT "s"."Id", "s"."ClienteId", "s"."Estado", "s"."FechaEmision", "s"."Numero", "s"."Subtotal", "s"."Total", "s"."TotalIva", "s"."Id0", "s"."Activo", "s"."Direccion", "s"."Email", "s"."Identificacion", "s"."Nombre", "s"."Telefono", "s"."TipoIdentificacion", "s0"."Id", "s0"."Cantidad", "s0"."FacturaId", "s0"."PorcentajeIva", "s0"."PrecioUnitario", "s0"."ProductoId", "s0"."Subtotal", "s0"."Id0", "s0"."Activo", "s0"."Codigo", "s0"."Descripcion", "s0"."Nombre", "s0"."PorcentajeIva0", "s0"."Precio", "s0"."Stock"
+      FROM (
+          SELECT "f"."Id", "f"."ClienteId", "f"."Estado", "f"."FechaEmision", "f"."Numero", "f"."Subtotal", "f"."Total", "f"."TotalIva", "c"."Id" AS "Id0", "c"."Activo", "c"."Direccion", "c"."Email", "c"."Identificacion", "c"."Nombre", "c"."Telefono", "c"."TipoIdentificacion"
+          FROM "Facturas" AS "f"
+          INNER JOIN "Clientes" AS "c" ON "f"."ClienteId" = "c"."Id"
+          WHERE "f"."Id" = @id
+          LIMIT 1
+      ) AS "s"
+      LEFT JOIN (
+          SELECT "d"."Id", "d"."Cantidad", "d"."FacturaId", "d"."PorcentajeIva", "d"."PrecioUnitario", "d"."ProductoId", "d"."Subtotal", "p"."Id" AS "Id0", "p"."Activo", "p"."Codigo", "p"."Descripcion", "p"."Nombre", "p"."PorcentajeIva" AS "PorcentajeIva0", "p"."Precio", "p"."Stock"
+          FROM "DetallesFactura" AS "d"
+          INNER JOIN "Productos" AS "p" ON "d"."ProductoId" = "p"."Id"
+      ) AS "s0" ON "s"."Id" = "s0"."FacturaId"
+      ORDER BY "s"."Id", "s"."Id0", "s0"."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@dto_Email='?' (Size = 24)], CommandType='Text', CommandTimeout='30']
+      SELECT "u"."Id", "u"."Activo", "u"."Email", "u"."Nombre", "u"."PasswordHash", "u"."Rol"
+      FROM "Usuarios" AS "u"
+      WHERE "u"."Email" = @dto_Email AND "u"."Activo"
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "f"."Id", "f"."ClienteId", "f"."Estado", "f"."FechaEmision", "f"."Numero", "f"."Subtotal", "f"."Total", "f"."TotalIva", "c"."Id", "c"."Activo", "c"."Direccion", "c"."Email", "c"."Identificacion", "c"."Nombre", "c"."Telefono", "c"."TipoIdentificacion", "s"."Id", "s"."Cantidad", "s"."FacturaId", "s"."PorcentajeIva", "s"."PrecioUnitario", "s"."ProductoId", "s"."Subtotal", "s"."Id0", "s"."Activo", "s"."Codigo", "s"."Descripcion", "s"."Nombre", "s"."PorcentajeIva0", "s"."Precio", "s"."Stock"
+      FROM "Facturas" AS "f"
+      INNER JOIN "Clientes" AS "c" ON "f"."ClienteId" = "c"."Id"
+      LEFT JOIN (
+          SELECT "d"."Id", "d"."Cantidad", "d"."FacturaId", "d"."PorcentajeIva", "d"."PrecioUnitario", "d"."ProductoId", "d"."Subtotal", "p"."Id" AS "Id0", "p"."Activo", "p"."Codigo", "p"."Descripcion", "p"."Nombre", "p"."PorcentajeIva" AS "PorcentajeIva0", "p"."Precio", "p"."Stock"
+          FROM "DetallesFactura" AS "d"
+          INNER JOIN "Productos" AS "p" ON "d"."ProductoId" = "p"."Id"
+      ) AS "s" ON "f"."Id" = "s"."FacturaId"
+      ORDER BY "f"."FechaEmision" DESC, "f"."Id", "c"."Id", "s"."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@dto_Email='?' (Size = 21)], CommandType='Text', CommandTimeout='30']
+      SELECT "u"."Id", "u"."Activo", "u"."Email", "u"."Nombre", "u"."PasswordHash", "u"."Rol"
+      FROM "Usuarios" AS "u"
+      WHERE "u"."Email" = @dto_Email AND "u"."Activo"
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "f"."Id", "f"."ClienteId", "f"."Estado", "f"."FechaEmision", "f"."Numero", "f"."Subtotal", "f"."Total", "f"."TotalIva", "c"."Id", "c"."Activo", "c"."Direccion", "c"."Email", "c"."Identificacion", "c"."Nombre", "c"."Telefono", "c"."TipoIdentificacion", "s"."Id", "s"."Cantidad", "s"."FacturaId", "s"."PorcentajeIva", "s"."PrecioUnitario", "s"."ProductoId", "s"."Subtotal", "s"."Id0", "s"."Activo", "s"."Codigo", "s"."Descripcion", "s"."Nombre", "s"."PorcentajeIva0", "s"."Precio", "s"."Stock"
+      FROM "Facturas" AS "f"
+      INNER JOIN "Clientes" AS "c" ON "f"."ClienteId" = "c"."Id"
+      LEFT JOIN (
+          SELECT "d"."Id", "d"."Cantidad", "d"."FacturaId", "d"."PorcentajeIva", "d"."PrecioUnitario", "d"."ProductoId", "d"."Subtotal", "p"."Id" AS "Id0", "p"."Activo", "p"."Codigo", "p"."Descripcion", "p"."Nombre", "p"."PorcentajeIva" AS "PorcentajeIva0", "p"."Precio", "p"."Stock"
+          FROM "DetallesFactura" AS "d"
+          INNER JOIN "Productos" AS "p" ON "d"."ProductoId" = "p"."Id"
+      ) AS "s" ON "f"."Id" = "s"."FacturaId"
+      ORDER BY "f"."FechaEmision" DESC, "f"."Id", "c"."Id", "s"."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@dto_Email='?' (Size = 21)], CommandType='Text', CommandTimeout='30']
+      SELECT "u"."Id", "u"."Activo", "u"."Email", "u"."Nombre", "u"."PasswordHash", "u"."Rol"
+      FROM "Usuarios" AS "u"
+      WHERE "u"."Email" = @dto_Email AND "u"."Activo"
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT "c"."Id", "c"."Activo", "c"."Direccion", "c"."Email", "c"."Identificacion", "c"."Nombre", "c"."Telefono", "c"."TipoIdentificacion"
+      FROM "Clientes" AS "c"
+      WHERE "c"."Id" = @p
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@productoIds1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT "p"."Id", "p"."Activo", "p"."Codigo", "p"."Descripcion", "p"."Nombre", "p"."PorcentajeIva", "p"."Precio", "p"."Stock"
+      FROM "Productos" AS "p"
+      WHERE "p"."Id" = @productoIds1 AND "p"."Activo"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "f"."Id"
+      FROM "Facturas" AS "f"
+      ORDER BY "f"."Id" DESC
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (Size = 17), @p4='?' (DbType = Decimal), @p5='?' (DbType = Decimal), @p6='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Facturas" ("ClienteId", "Estado", "FechaEmision", "Numero", "Subtotal", "Total", "TotalIva")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
+      RETURNING "Id";
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      UPDATE "Productos" SET "Stock" = @p0
+      WHERE "Id" = @p1
+      RETURNING 1;
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (DbType = Decimal), @p5='?' (DbType = Decimal), @p6='?' (DbType = Int32), @p7='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "DetallesFactura" ("Cantidad", "FacturaId", "PorcentajeIva", "PrecioUnitario", "ProductoId", "Subtotal")
+      VALUES (@p2, @p3, @p4, @p5, @p6, @p7)
+      RETURNING "Id";
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "f"."Id", "f"."ClienteId", "f"."Estado", "f"."FechaEmision", "f"."Numero", "f"."Subtotal", "f"."Total", "f"."TotalIva", "c"."Id", "c"."Activo", "c"."Direccion", "c"."Email", "c"."Identificacion", "c"."Nombre", "c"."Telefono", "c"."TipoIdentificacion", "s"."Id", "s"."Cantidad", "s"."FacturaId", "s"."PorcentajeIva", "s"."PrecioUnitario", "s"."ProductoId", "s"."Subtotal", "s"."Id0", "s"."Activo", "s"."Codigo", "s"."Descripcion", "s"."Nombre", "s"."PorcentajeIva0", "s"."Precio", "s"."Stock"
+      FROM "Facturas" AS "f"
+      INNER JOIN "Clientes" AS "c" ON "f"."ClienteId" = "c"."Id"
+      LEFT JOIN (
+          SELECT "d"."Id", "d"."Cantidad", "d"."FacturaId", "d"."PorcentajeIva", "d"."PrecioUnitario", "d"."ProductoId", "d"."Subtotal", "p"."Id" AS "Id0", "p"."Activo", "p"."Codigo", "p"."Descripcion", "p"."Nombre", "p"."PorcentajeIva" AS "PorcentajeIva0", "p"."Precio", "p"."Stock"
+          FROM "DetallesFactura" AS "d"
+          INNER JOIN "Productos" AS "p" ON "d"."ProductoId" = "p"."Id"
+      ) AS "s" ON "f"."Id" = "s"."FacturaId"
+      ORDER BY "f"."FechaEmision" DESC, "f"."Id", "c"."Id", "s"."Id"

@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 import { Factura } from '../../models/models';
 
 @Component({
@@ -10,6 +11,7 @@ import { Factura } from '../../models/models';
 })
 export class Facturas implements OnInit {
   private readonly api = inject(ApiService);
+  readonly auth = inject(AuthService);
 
   readonly facturas = signal<Factura[]>([]);
   readonly cargando = signal(true);

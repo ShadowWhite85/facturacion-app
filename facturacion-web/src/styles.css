@@ -92,3 +92,34 @@ button:disabled {
 .total {
   font-size: 1.1rem;
 }
+
+.login-card {
+  max-width: 380px;
+  margin: 4rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.subtitulo {
+  color: #6b7280;
+  margin-top: -0.5rem;
+}
+
+.demo {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.demo summary {
+  cursor: pointer;
+  font-weight: 600;
+}

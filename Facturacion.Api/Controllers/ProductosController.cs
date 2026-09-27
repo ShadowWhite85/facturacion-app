@@ -1,6 +1,7 @@
 using Facturacion.Api.Data;
 using Facturacion.Api.DTOs;
 using Facturacion.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace Facturacion.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ProductosController(FacturacionDbContext db) : ControllerBase
 {
     /// <summary>Lista productos, con búsqueda opcional por nombre o código.</summary>
@@ -75,8 +77,9 @@ public class ProductosController(FacturacionDbContext db) : ControllerBase
         return NoContent();
     }
 
-    /// <summary>Eliminación lógica: el producto queda inactivo para no romper facturas históricas.</summary>
+    /// <summary>Eliminación lógica: el producto queda inactivo para no romper facturas históricas. Solo admin.</summary>
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = nameof(RolUsuario.Admin))]
     public async Task<IActionResult> Delete(int id, CancellationToken ct)
     {
         var producto = await db.Productos.FindAsync([id], ct);

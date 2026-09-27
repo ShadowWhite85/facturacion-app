@@ -1,0 +1,37 @@
+<div class="login-card">
+  <h2>📦 FacturaciónApp</h2>
+  <p class="subtitulo">Inicia sesión para continuar</p>
+
+  <form (ngSubmit)="entrar()" class="form-login">
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="email"
+      name="email"
+      required
+      autocomplete="username"
+    />
+    <input
+      type="password"
+      placeholder="Contraseña"
+      [(ngModel)]="password"
+      name="password"
+      required
+      autocomplete="current-password"
+    />
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+
+    <button type="submit" class="primario" [disabled]="cargando()">
+      {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
+    </button>
+  </form>
+
+  <details class="demo">
+    <summary>🔑 Credenciales de demostración</summary>
+    <p><strong>Admin</strong> (puede anular): admin@facturacion.app / admin123</p>
+    <p><strong>Vendedor</strong> (solo factura): vendedor@facturacion.app / vendedor123</p>
+  </details>
+</div>

@@ -13,7 +13,16 @@ frontend en **Angular 22**.
 - **Facturación:** emisión con numeración secuencial formato Ecuador (`001-001-000000001`),
   cálculo de IVA por línea (15% por defecto, configurable por producto), descuento de stock
   transaccional y anulación con devolución de stock
-- **API REST documentada** con Swagger UI
+- **Autenticación JWT con roles:** el vendedor puede facturar; solo el admin puede anular
+  y eliminar productos. Contraseñas hasheadas con BCrypt
+- **API REST documentada** con Swagger UI (con botón Authorize para probar con token)
+
+## 🔑 Credenciales de demostración
+
+| Rol | Email | Contraseña | Permisos |
+|---|---|---|---|
+| Admin | `admin@facturacion.app` | `admin123` | Todo + anular facturas + eliminar productos |
+| Vendedor | `vendedor@facturacion.app` | `vendedor123` | Consultar y emitir facturas |
 - **Base de datos con datos de demostración** al primer arranque
 
 ## 📸 Capturas
@@ -57,7 +66,7 @@ La base de datos SQLite se crea automáticamente con datos de demostración
 
 ## 🗺️ Roadmap
 
-- [ ] Autenticación JWT con roles (admin / vendedor)
+- [x] Autenticación JWT con roles (admin / vendedor) ✅
 - [ ] Descarga de factura en PDF (QuestPDF)
 - [ ] Tests unitarios de la lógica de facturación (xUnit)
 - [ ] EF Core Migrations + Docker + GitHub Actions

@@ -31,3 +31,21 @@ nav a.activo {
   background: #1a56db;
   color: #fff;
 }
+
+.espacio {
+  flex: 1;
+}
+
+.usuario {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.rol {
+  background: #eef2ff;
+  color: #1a56db;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  margin-left: 0.3rem;
+}

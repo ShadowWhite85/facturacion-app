@@ -1,6 +1,7 @@
 using Facturacion.Api.Data;
 using Facturacion.Api.DTOs;
 using Facturacion.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace Facturacion.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class FacturasController(FacturacionDbContext db) : ControllerBase
 {
     [HttpGet]
@@ -97,8 +99,9 @@ public class FacturasController(FacturacionDbContext db) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = factura.Id }, MapearDto(factura));
     }
 
-    /// <summary>Anula la factura y devuelve el stock de los productos.</summary>
+    /// <summary>Anula la factura y devuelve el stock de los productos. Solo admin.</summary>
     [HttpPost("{id:int}/anular")]
+    [Authorize(Roles = nameof(RolUsuario.Admin))]
     public async Task<IActionResult> Anular(int id, CancellationToken ct)
     {
         var factura = await db.Facturas

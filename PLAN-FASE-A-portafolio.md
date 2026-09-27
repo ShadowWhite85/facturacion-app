@@ -32,7 +32,7 @@ git push -u origin main
 
 ### A.1.2 README.md profesional
 Debe contener: título + descripción 2 líneas, capturas (`productos.png`, `facturas.png` están en la raíz del proyecto), stack, cómo ejecutar, endpoints, roadmap.
-- [ ] README publicado
+- [x] README publicado ✅ 2026-09-27
 
 ### A.1.3 Autenticación JWT + roles
 Criterio de aceptación: login devuelve token; endpoint de anular factura exige rol admin.
@@ -40,7 +40,7 @@ Criterio de aceptación: login devuelve token; endpoint de anular factura exige 
 - Entidad `Usuario` (email, passwordHash BCrypt, rol)
 - Endpoints: `POST /api/auth/login`, config JWT en Program.cs
 - Angular: interceptor HTTP + guard de rutas + pantalla login
-- [ ] JWT funcionando E2E
+- [x] JWT funcionando E2E ✅ 2026-09-27 (401/403/200 verificados; interceptor + guard + login en Angular)
 
 ### A.1.4 PDF de factura
 - Paquete: `QuestPDF` (licencia Community gratis)
@@ -93,3 +93,5 @@ Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login →
 |---|---|
 | 2026-09-27 | Base E2E funcionando en local |
 | 2026-09-27 | A.1.1 ✅ Git + GitHub: repo público ShadowWhite85/facturacion-app |
+| 2026-09-27 | A.1.2 ✅ README profesional publicado |
+| 2026-09-27 | A.1.3 ✅ JWT + roles (admin/vendedor) con pruebas E2E de seguridad |

@@ -27,7 +27,7 @@
           <td><strong>{{ f.total | currency: 'USD' }}</strong></td>
           <td>{{ f.estado === 0 ? '✅ Emitida' : '❌ Anulada' }}</td>
           <td>
-            @if (f.estado === 0) {
+            @if (f.estado === 0 && auth.esAdmin()) {
               <button (click)="$event.stopPropagation(); anular(f.id)">Anular</button>
             }
           </td>
