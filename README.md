@@ -50,6 +50,9 @@ dotnet run --project Facturacion.Api
 cd facturacion-web
 npm install
 npx ng serve
+
+# 3. Tests (8 pruebas de facturación y clave de acceso SRI)
+dotnet test
 ```
 
 La base de datos SQLite se crea automáticamente con datos de demostración
@@ -72,7 +75,7 @@ La base de datos SQLite se crea automáticamente con datos de demostración
 - [x] Factura en PDF (RIDE) con QuestPDF ✅
 - [x] XML según esquema SRI v2.1.0 + clave de acceso módulo 11 ✅ *(ambiente pruebas; firma XAdES y autorización SRI pendientes)*
 - [ ] Firma digital XAdES-BES y autorización con el SRI
-- [ ] Tests unitarios de la lógica de facturación (xUnit)
+- [x] Tests de la lógica de facturación (xUnit, 8 tests ✅)
 - [ ] EF Core Migrations + Docker + GitHub Actions
 - [ ] Deploy público (Render + GitHub Pages)
 

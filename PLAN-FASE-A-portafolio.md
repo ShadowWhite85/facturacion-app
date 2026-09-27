@@ -52,7 +52,7 @@ Criterio de aceptación: login devuelve token; endpoint de anular factura exige 
 - Proyecto `Facturacion.Tests` (xUnit + EF Core InMemory)
 - Tests mínimos: cálculo IVA, descuento stock, error stock insuficiente, anulación devuelve stock, numeración secuencial
 - Ejecutar: `dotnet test`
-- [ ] 5+ tests pasando
+- [x] 8 tests pasando ✅ 2026-09-27 (IVA, stock, bad request, anulación, numeración, clave acceso módulo 11)
 
 ### A.1.6 EF Core Migrations
 ```powershell
@@ -96,3 +96,4 @@ Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login →
 | 2026-09-27 | A.1.2 ✅ README profesional publicado |
 | 2026-09-27 | A.1.3 ✅ JWT + roles (admin/vendedor) con pruebas E2E de seguridad |
 | 2026-09-27 | A.1.4 ✅ PDF (QuestPDF RIDE) + XML SRI v2.1.0 con clave de acceso mod-11 |
+| 2026-09-27 | A.1.5 ✅ Facturacion.Tests (xUnit) con 8 tests verdes, incluido en la solución |
