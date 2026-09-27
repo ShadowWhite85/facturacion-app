@@ -28,7 +28,7 @@ git add -A; git commit -m "Sistema de facturación: API .NET 10 + Angular 22"
 git remote add origin https://github.com/<mi-usuario>/facturacion-app.git
 git push -u origin main
 ```
-- [ ] Repo público en GitHub creado y subido
+- [x] Repo público en GitHub creado y subido ✅ 2026-09-27 → https://github.com/ShadowWhite85/facturacion-app
 
 ### A.1.2 README.md profesional
 Debe contener: título + descripción 2 líneas, capturas (`productos.png`, `facturas.png` están en la raíz del proyecto), stack, cómo ejecutar, endpoints, roadmap.
@@ -92,3 +92,4 @@ Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login →
 | Fecha | Avance |
 |---|---|
 | 2026-09-27 | Base E2E funcionando en local |
+| 2026-09-27 | A.1.1 ✅ Git + GitHub: repo público ShadowWhite85/facturacion-app |
