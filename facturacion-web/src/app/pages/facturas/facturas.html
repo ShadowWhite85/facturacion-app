@@ -27,6 +27,8 @@
           <td><strong>{{ f.total | currency: 'USD' }}</strong></td>
           <td>{{ f.estado === 0 ? '✅ Emitida' : '❌ Anulada' }}</td>
           <td>
+            <button (click)="$event.stopPropagation(); descargar(f.id, f.numero, 'pdf')">PDF</button>
+            <button (click)="$event.stopPropagation(); descargar(f.id, f.numero, 'xml')">XML</button>
             @if (f.estado === 0 && auth.esAdmin()) {
               <button (click)="$event.stopPropagation(); anular(f.id)">Anular</button>
             }

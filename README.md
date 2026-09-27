@@ -62,12 +62,16 @@ La base de datos SQLite se crea automáticamente con datos de demostración
 | GET/POST/PUT/DELETE | `/api/productos` | Gestión de productos |
 | GET/POST | `/api/clientes` | Gestión de clientes |
 | GET/POST | `/api/facturas` | Emisión y consulta de facturas |
+| GET | `/api/facturas/{id}/pdf` | RIDE (PDF) de la factura |
+| GET | `/api/facturas/{id}/xml` | XML esquema SRI v2.1.0 con clave de acceso de 49 dígitos (módulo 11) |
 | POST | `/api/facturas/{id}/anular` | Anulación con devolución de stock |
 
 ## 🗺️ Roadmap
 
 - [x] Autenticación JWT con roles (admin / vendedor) ✅
-- [ ] Descarga de factura en PDF (QuestPDF)
+- [x] Factura en PDF (RIDE) con QuestPDF ✅
+- [x] XML según esquema SRI v2.1.0 + clave de acceso módulo 11 ✅ *(ambiente pruebas; firma XAdES y autorización SRI pendientes)*
+- [ ] Firma digital XAdES-BES y autorización con el SRI
 - [ ] Tests unitarios de la lógica de facturación (xUnit)
 - [ ] EF Core Migrations + Docker + GitHub Actions
 - [ ] Deploy público (Render + GitHub Pages)

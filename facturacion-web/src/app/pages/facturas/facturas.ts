@@ -34,4 +34,16 @@ export class Facturas implements OnInit {
   anular(id: number) {
     this.api.anularFactura(id).subscribe(() => this.cargar());
   }
+
+  descargar(id: number, numero: string, formato: 'pdf' | 'xml') {
+    const peticion = formato === 'pdf' ? this.api.descargarPdf(id) : this.api.descargarXml(id);
+    peticion.subscribe((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `factura-${numero}.${formato}`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
 }

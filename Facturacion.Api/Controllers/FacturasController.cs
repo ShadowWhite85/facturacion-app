@@ -10,7 +10,10 @@ namespace Facturacion.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
-public class FacturasController(FacturacionDbContext db) : ControllerBase
+public class FacturasController(
+    FacturacionDbContext db,
+    Facturacion.Api.Services.FacturaPdfService pdfService,
+    Facturacion.Api.Services.FacturaXmlService xmlService) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<List<FacturaDto>>> GetAll(CancellationToken ct)
@@ -99,6 +102,28 @@ public class FacturasController(FacturacionDbContext db) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = factura.Id }, MapearDto(factura));
     }
 
+    /// <summary>Descarga el RIDE (PDF) de la factura.</summary>
+    [HttpGet("{id:int}/pdf")]
+    public async Task<IActionResult> GetPdf(int id, CancellationToken ct)
+    {
+        var factura = await CargarFactura(id, ct);
+        if (factura is null) return NotFound();
+
+        var pdf = pdfService.GenerarPdf(factura);
+        return File(pdf, "application/pdf", $"factura-{factura.Numero}.pdf");
+    }
+
+    /// <summary>Descarga el XML del comprobante según esquema SRI v2.1.0 (ambiente pruebas).</summary>
+    [HttpGet("{id:int}/xml")]
+    public async Task<IActionResult> GetXml(int id, CancellationToken ct)
+    {
+        var factura = await CargarFactura(id, ct);
+        if (factura is null) return NotFound();
+
+        var xml = xmlService.GenerarXml(factura);
+        return File(System.Text.Encoding.UTF8.GetBytes(xml), "application/xml", $"factura-{factura.Numero}.xml");
+    }
+
     /// <summary>Anula la factura y devuelve el stock de los productos. Solo admin.</summary>
     [HttpPost("{id:int}/anular")]
     [Authorize(Roles = nameof(RolUsuario.Admin))]
@@ -123,6 +148,12 @@ public class FacturasController(FacturacionDbContext db) : ControllerBase
 
         return NoContent();
     }
+
+    private async Task<Factura?> CargarFactura(int id, CancellationToken ct) =>
+        await db.Facturas
+            .Include(f => f.Cliente)
+            .Include(f => f.Detalles).ThenInclude(d => d.Producto)
+            .FirstOrDefaultAsync(f => f.Id == id, ct);
 
     private static FacturaDto MapearDto(Factura f) => new(
         f.Id,

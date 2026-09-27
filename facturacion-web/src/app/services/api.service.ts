@@ -33,4 +33,12 @@ export class ApiService {
   anularFactura(id: number) {
     return this.http.post(`${this.base}/facturas/${id}/anular`, {});
   }
+
+  descargarPdf(id: number) {
+    return this.http.get(`${this.base}/facturas/${id}/pdf`, { responseType: 'blob' });
+  }
+
+  descargarXml(id: number) {
+    return this.http.get(`${this.base}/facturas/${id}/xml`, { responseType: 'blob' });
+  }
 }

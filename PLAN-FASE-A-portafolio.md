@@ -46,7 +46,7 @@ Criterio de aceptación: login devuelve token; endpoint de anular factura exige 
 - Paquete: `QuestPDF` (licencia Community gratis)
 - Endpoint: `GET /api/facturas/{id}/pdf` → PDF con formato factura Ecuador
 - Angular: botón "Descargar PDF" en lista de facturas
-- [ ] PDF descargable
+- [x] PDF descargable ✅ 2026-09-27 — **y adicional: XML esquema SRI v2.1.0 + clave de acceso módulo 11** (pendientes para facturación real: firma XAdES-BES con firma electrónica + autorización en servidores SRI)
 
 ### A.1.5 Tests (xUnit)
 - Proyecto `Facturacion.Tests` (xUnit + EF Core InMemory)
@@ -95,3 +95,4 @@ Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login →
 | 2026-09-27 | A.1.1 ✅ Git + GitHub: repo público ShadowWhite85/facturacion-app |
 | 2026-09-27 | A.1.2 ✅ README profesional publicado |
 | 2026-09-27 | A.1.3 ✅ JWT + roles (admin/vendedor) con pruebas E2E de seguridad |
+| 2026-09-27 | A.1.4 ✅ PDF (QuestPDF RIDE) + XML SRI v2.1.0 con clave de acceso mod-11 |

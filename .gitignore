@@ -13,7 +13,7 @@ facturacion-web/.angular/
 
 # Herramientas de prueba
 .playwright-mcp/
-ng-serve.log
+*.log
 
 # SO
 Thumbs.db

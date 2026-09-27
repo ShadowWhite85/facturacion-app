@@ -29,6 +29,9 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<FacturacionDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<Facturacion.Api.Services.FacturaPdfService>();
+builder.Services.AddScoped<Facturacion.Api.Services.FacturaXmlService>();
+
 // Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -54,6 +57,8 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod()));
+
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
 var app = builder.Build();
 
