@@ -1,0 +1,28 @@
+<h2>Clientes</h2>
+
+@if (cargando()) {
+  <p>Cargando...</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Identificación</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (c of clientes(); track c.id) {
+        <tr>
+          <td>{{ c.identificacion }}</td>
+          <td>{{ c.nombre }}</td>
+          <td>{{ c.email ?? '—' }}</td>
+          <td>{{ c.telefono ?? '—' }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="4">Sin clientes registrados</td></tr>
+      }
+    </tbody>
+  </table>
+}

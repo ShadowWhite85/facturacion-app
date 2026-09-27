@@ -1,0 +1,19 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+*.db
+*.db-*
+
+# Node / Angular
+node_modules/
+facturacion-web/dist/
+facturacion-web/.angular/
+
+# Herramientas de prueba
+.playwright-mcp/
+ng-serve.log
+
+# SO
+Thumbs.db

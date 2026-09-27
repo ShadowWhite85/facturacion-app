@@ -1,0 +1,51 @@
+<h2>Facturas emitidas</h2>
+
+@if (cargando()) {
+  <p>Cargando...</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Subtotal</th>
+        <th>IVA</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (f of facturas(); track f.id) {
+        <tr (click)="expandida.set(expandida() === f.id ? null : f.id)" class="fila-clic">
+          <td>{{ f.numero }}</td>
+          <td>{{ f.fechaEmision | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ f.clienteNombre }}</td>
+          <td>{{ f.subtotal | currency: 'USD' }}</td>
+          <td>{{ f.totalIva | currency: 'USD' }}</td>
+          <td><strong>{{ f.total | currency: 'USD' }}</strong></td>
+          <td>{{ f.estado === 0 ? '✅ Emitida' : '❌ Anulada' }}</td>
+          <td>
+            @if (f.estado === 0) {
+              <button (click)="$event.stopPropagation(); anular(f.id)">Anular</button>
+            }
+          </td>
+        </tr>
+        @if (expandida() === f.id) {
+          <tr class="detalle">
+            <td colspan="8">
+              <ul>
+                @for (d of f.detalles; track d.productoId) {
+                  <li>{{ d.cantidad }} × {{ d.productoNombre }} — {{ d.subtotal | currency: 'USD' }}</li>
+                }
+              </ul>
+            </td>
+          </tr>
+        }
+      } @empty {
+        <tr><td colspan="8">Aún no hay facturas. ¡Emite la primera!</td></tr>
+      }
+    </tbody>
+  </table>
+}

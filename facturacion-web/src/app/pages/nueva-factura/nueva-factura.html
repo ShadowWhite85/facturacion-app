@@ -1,0 +1,40 @@
+<h2>Nueva factura</h2>
+
+<label>
+  Cliente:
+  <select [ngModel]="clienteId()" (ngModelChange)="clienteId.set(+$event)">
+    <option [value]="0" disabled>Seleccione un cliente...</option>
+    @for (c of clientes(); track c.id) {
+      <option [value]="c.id">{{ c.nombre }} ({{ c.identificacion }})</option>
+    }
+  </select>
+</label>
+
+<h3>Detalle</h3>
+@for (linea of lineas(); track $index) {
+  <div class="linea">
+    <select [ngModel]="linea.productoId" (ngModelChange)="actualizarLinea($index, { productoId: +$event })">
+      <option [value]="0" disabled>Producto...</option>
+      @for (p of productos(); track p.id) {
+        <option [value]="p.id">{{ p.nombre }} — ${{ p.precio }} (stock: {{ p.stock }})</option>
+      }
+    </select>
+    <input type="number" min="1" [ngModel]="linea.cantidad" (ngModelChange)="actualizarLinea($index, { cantidad: +$event })" />
+  </div>
+}
+
+<button type="button" (click)="agregarLinea()">+ Agregar línea</button>
+
+<p class="total">Total estimado (con IVA): <strong>{{ totalEstimado() | currency: 'USD' }}</strong></p>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<button
+  class="primario"
+  [disabled]="clienteId() === 0 || lineas().every((l) => l.productoId === 0)"
+  (click)="emitir()"
+>
+  Emitir factura
+</button>

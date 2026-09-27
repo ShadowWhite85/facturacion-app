@@ -1,0 +1,50 @@
+<h2>Productos e Inventario</h2>
+
+<input
+  type="search"
+  placeholder="Buscar por nombre o código..."
+  [ngModel]="busqueda()"
+  (ngModelChange)="busqueda.set($event); cargar()"
+/>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (cargando()) {
+  <p>Cargando...</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>IVA</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (p of productos(); track p.id) {
+        <tr>
+          <td>{{ p.codigo }}</td>
+          <td>{{ p.nombre }}</td>
+          <td>$ {{ p.precio | number: '1.2-2' }}</td>
+          <td>{{ p.porcentajeIva }}%</td>
+          <td [class.bajo-stock]="p.stock < 5">{{ p.stock }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5">Sin productos registrados</td></tr>
+      }
+    </tbody>
+  </table>
+}
+
+<h3>Nuevo producto</h3>
+<form (ngSubmit)="crear()" class="formulario">
+  <input placeholder="Código" [(ngModel)]="nuevo.codigo" name="codigo" required />
+  <input placeholder="Nombre" [(ngModel)]="nuevo.nombre" name="nombre" required />
+  <input type="number" placeholder="Precio" [(ngModel)]="nuevo.precio" name="precio" min="0" step="0.01" required />
+  <input type="number" placeholder="Stock" [(ngModel)]="nuevo.stock" name="stock" min="0" required />
+  <button type="submit">Guardar</button>
+</form>

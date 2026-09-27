@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  background: #f9fafb;
+  color: #111827;
+  font-family: system-ui, sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f3f4f6;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+input,
+select {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #e5e7eb;
+  cursor: pointer;
+}
+
+button.primario {
+  background: #1a56db;
+  color: #fff;
+  font-weight: 600;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.formulario {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.linea {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fila-clic {
+  cursor: pointer;
+}
+
+.fila-clic:hover {
+  background: #f0f5ff;
+}
+
+.detalle td {
+  background: #f8fafc;
+}
+
+.bajo-stock {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.error {
+  color: #dc2626;
+}
+
+.total {
+  font-size: 1.1rem;
+}
