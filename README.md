@@ -78,7 +78,7 @@ migraciones: `dotnet ef migrations add <Nombre> --project Facturacion.Api`.
 - [ ] Firma digital XAdES-BES y autorización con el SRI
 - [x] Tests de la lógica de facturación (xUnit, 8 tests ✅)
 - [x] EF Core Migrations + MigrateAsync ✅
-- [ ] Dockerfile para la API
+- [x] Dockerfile (multi-stage, validado) ✅
 - [ ] GitHub Actions (CI: build + tests)
 - [ ] Deploy público (Render + GitHub Pages)
 

@@ -64,7 +64,7 @@ dotnet ef migrations add Inicial --project Facturacion.Api
 
 ### A.1.7 Dockerfile
 Multi-stage: SDK build → runtime aspnet:10.0. Puerto 8080.
-- [ ] `docker build -t facturacion-api .` funciona (o validar sintaxis si no hay Docker)
+- [x] Dockerfile (multi-stage) + .dockerignore ✅ 2026-09-27 — *sin Docker local: comandos restore/publish validados simulando las capas* (build real pendiente en CI/Render)
 
 ### A.1.8 GitHub Actions
 `.github/workflows/ci.yml`: push → setup-dotnet 10 → restore, build, test; + job Node 24 que buildea Angular.
@@ -98,3 +98,4 @@ Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login →
 | 2026-09-27 | A.1.4 ✅ PDF (QuestPDF RIDE) + XML SRI v2.1.0 con clave de acceso mod-11 |
 | 2026-09-27 | A.1.5 ✅ Facturacion.Tests (xUnit) con 8 tests verdes, incluido en la solución |
 | 2026-09-27 | A.1.6 ✅ EF Core Migrations (Inicial) + MigrateAsync + dotnet-ef local |
+| 2026-09-27 | A.1.7 ✅ Dockerfile multi-stage + .dockerignore (comandos validados sin Docker local) |

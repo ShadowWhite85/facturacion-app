@@ -1,0 +1,12 @@
+# Artefactos de build locales
+bin/
+obj/
+facturacion.db*
+*.log
+
+# Solo se necesita la API (el frontend se sirve aparte o inyectado)
+facturacion-web/
+Facturacion.Tests/
+*.md
+*.png
+*.pdf
