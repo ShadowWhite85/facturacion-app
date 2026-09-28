@@ -51,10 +51,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// CORS para el frontend Angular (puerto 4200 en desarrollo)
+// CORS configurable: orígenes permitidos en appsettings (dev + producción)
+var orígenesPermitidos = builder.Configuration.GetSection("Cors:Origins").Get<string[]>() ?? [];
 builder.Services.AddCors(options =>
     options.AddPolicy("Angular", policy =>
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins(orígenesPermitidos)
               .AllowAnyHeader()
               .AllowAnyMethod()));
 
