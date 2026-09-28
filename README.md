@@ -1,5 +1,7 @@
 # 📦 FacturaciónApp
 
+[![CI](https://github.com/ShadowWhite85/facturacion-app/actions/workflows/ci.yml/badge.svg)](https://github.com/ShadowWhite85/facturacion-app/actions/workflows/ci.yml)
+
 Sistema de **facturación e inventario para pymes** adaptado al contexto ecuatoriano
 (RUC, cédula, consumidor final, IVA configurable). API REST en **.NET 10** con
 frontend en **Angular 22**.
@@ -79,7 +81,7 @@ migraciones: `dotnet ef migrations add <Nombre> --project Facturacion.Api`.
 - [x] Tests de la lógica de facturación (xUnit, 8 tests ✅)
 - [x] EF Core Migrations + MigrateAsync ✅
 - [x] Dockerfile (multi-stage, validado) ✅
-- [ ] GitHub Actions (CI: build + tests)
+- [x] GitHub Actions (CI: build + tests) ✅
 - [ ] Deploy público (Render + GitHub Pages)
 
 ## 📄 Licencia

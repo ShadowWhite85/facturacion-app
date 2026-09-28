@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dotnet:
+    name: API .NET 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore
+        run: dotnet restore FacturacionApp.slnx
+      - name: Build
+        run: dotnet build FacturacionApp.slnx --no-restore --verbosity quiet
+      - name: Test
+        run: dotnet test FacturacionApp.slnx --no-build --verbosity quiet
+
+  angular:
+    name: Frontend Angular 22
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: facturacion-web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: facturacion-web/package-lock.json
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Build
+        run: npx ng build --output-mode=static
