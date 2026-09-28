@@ -30,9 +30,12 @@ public class FacturacionDbContext(DbContextOptions<FacturacionDbContext> options
             .IsUnique();
 
         // Datos de demostración realistas (Ecuador)
+        // Datos de demostración realistas (Ecuador)
+        // Los hashes son fijos (no BCrypt.HashPassword en runtime) porque el modelo
+        // HasData debe ser determinístico o EF falla con PendingModelChangesWarning.
         modelBuilder.Entity<Usuario>().HasData(
-            new Usuario { Id = 1, Email = "admin@facturacion.app", Nombre = "Administrador Demo", Rol = RolUsuario.Admin, PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123") },
-            new Usuario { Id = 2, Email = "vendedor@facturacion.app", Nombre = "Vendedor Demo", Rol = RolUsuario.Vendedor, PasswordHash = BCrypt.Net.BCrypt.HashPassword("vendedor123") }
+            new Usuario { Id = 1, Email = "admin@facturacion.app", Nombre = "Administrador Demo", Rol = RolUsuario.Admin, PasswordHash = "$2a$11$kSg0JBib7cgq.yS9QbDwf.iy5dEAA0WjyWYLjmEh.S9qm//nqIg4S" },
+            new Usuario { Id = 2, Email = "vendedor@facturacion.app", Nombre = "Vendedor Demo", Rol = RolUsuario.Vendedor, PasswordHash = "$2a$11$qcx6yyVjcElKjcrbM/KIO.vThaVt9l.BNDTUJqDRf8DvcZRgyTj6C" }
         );
 
         modelBuilder.Entity<Producto>().HasData(

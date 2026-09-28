@@ -55,8 +55,9 @@ npx ng serve
 dotnet test
 ```
 
-La base de datos SQLite se crea automáticamente con datos de demostración
-(productos y clientes de ejemplo) — no se requiere ningún setup adicional.
+La base de datos **se crea automáticamente con migraciones EF Core** (datos de
+demostración incluidos) — no se requiere ningún setup adicional. Nuevas
+migraciones: `dotnet ef migrations add <Nombre> --project Facturacion.Api`.
 
 ## 📡 Endpoints principales
 
@@ -76,7 +77,9 @@ La base de datos SQLite se crea automáticamente con datos de demostración
 - [x] XML según esquema SRI v2.1.0 + clave de acceso módulo 11 ✅ *(ambiente pruebas; firma XAdES y autorización SRI pendientes)*
 - [ ] Firma digital XAdES-BES y autorización con el SRI
 - [x] Tests de la lógica de facturación (xUnit, 8 tests ✅)
-- [ ] EF Core Migrations + Docker + GitHub Actions
+- [x] EF Core Migrations + MigrateAsync ✅
+- [ ] Dockerfile para la API
+- [ ] GitHub Actions (CI: build + tests)
 - [ ] Deploy público (Render + GitHub Pages)
 
 ## 📄 Licencia

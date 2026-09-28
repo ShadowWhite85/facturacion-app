@@ -60,7 +60,7 @@ dotnet tool install --global dotnet-ef   # si no está
 dotnet ef migrations add Inicial --project Facturacion.Api
 ```
 - Reemplazar `EnsureCreatedAsync()` por `MigrateAsync()` en Program.cs
-- [ ] Migraciones en el repo
+- [x] Migraciones en el repo ✅ 2026-09-27 (dotnet-ef local vía `.config/dotnet-tools.json`; MigrateAsync reemplaza EnsureCreated; hashes seed fijos por PendingModelChangesWarning)
 
 ### A.1.7 Dockerfile
 Multi-stage: SDK build → runtime aspnet:10.0. Puerto 8080.
@@ -97,3 +97,4 @@ Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login →
 | 2026-09-27 | A.1.3 ✅ JWT + roles (admin/vendedor) con pruebas E2E de seguridad |
 | 2026-09-27 | A.1.4 ✅ PDF (QuestPDF RIDE) + XML SRI v2.1.0 con clave de acceso mod-11 |
 | 2026-09-27 | A.1.5 ✅ Facturacion.Tests (xUnit) con 8 tests verdes, incluido en la solución |
+| 2026-09-27 | A.1.6 ✅ EF Core Migrations (Inicial) + MigrateAsync + dotnet-ef local |
