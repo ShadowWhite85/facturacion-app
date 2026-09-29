@@ -87,7 +87,9 @@ Para citas de clínicas/peluquerías. Reutiliza aprendizajes; API minimalista + 
 - [ ] Deploy en Render
 
 ## 📦 Entregable de cierre de fase
-Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login → emitir factura → descargar PDF → repo GitHub.
+Portafolio con demo en vivo + video mostrando: login → emitir factura → descargar PDF → repo GitHub.
+- [x] Video grabado ✅ 2026-09-28: `GrabaciónFacturación.mp4` (56 s, guion completo verificado por el autor)
+- [x] Video no publicado (decisión 2026-09-28: solo en el equipo, para envío directo por WhatsApp/postulaciones)
 
 ## 🔄 Registro
 | Fecha | Avance |
@@ -104,3 +106,4 @@ Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login →
 | 2026-09-27 | A.2.2 ✅ GitHub Pages en vivo: https://shadowwhite85.github.io/facturacion-app/ (deploy vía Actions) |
 | 2026-09-27 | A.2.1 ✅ API en Render (https://facturacion-app-8c75.onrender.com): login JWT + CORS + seed 5 productos E2E |
 | 2026-09-27 | A.2.3/A.2.4 ✅ environment.prod con URL real + README con links en vivo |
+| 2026-09-28 | Entregable: video GrabaciónFacturación.mp4 grabado (56 s, guion completo) + guion ENTREGABLE-VIDEO.md + prueba humo E2E (factura 001 + PDF + XML en producción) |
