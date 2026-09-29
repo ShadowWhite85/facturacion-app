@@ -83,8 +83,8 @@ Multi-stage: SDK build → runtime aspnet:10.0. Puerto 8080.
 
 ## Paso A.3 — Proyecto 2 (opcional): API de agendamiento
 Para citas de clínicas/peluquerías. Reutiliza aprendizajes; API minimalista + Swagger público.
-- [ ] Scaffold + CRUD citas + JWT
-- [ ] Deploy en Render
+- [x] Scaffold + CRUD citas + JWT ✅ 2026-09-28 (.NET 10 Minimal API + EF Core + SQLite; 6 tests xUnit verdes; repo `ShadowWhite85/agendamiento-api`, CI verde)
+- [x] Deploy en Render ✅ 2026-09-28 — URL: `https://agendamiento-api-jxfj.onrender.com` (E2E: Swagger, logins, seed 4 citas, crear, 403 recepcionista / 204 admin)
 
 ## 📦 Entregable de cierre de fase
 Portafolio con demo en vivo + video mostrando: login → emitir factura → descargar PDF → repo GitHub.
@@ -107,3 +107,4 @@ Portafolio con demo en vivo + video mostrando: login → emitir factura → desc
 | 2026-09-27 | A.2.1 ✅ API en Render (https://facturacion-app-8c75.onrender.com): login JWT + CORS + seed 5 productos E2E |
 | 2026-09-27 | A.2.3/A.2.4 ✅ environment.prod con URL real + README con links en vivo |
 | 2026-09-28 | Entregable: video GrabaciónFacturación.mp4 grabado (56 s, guion completo) + guion ENTREGABLE-VIDEO.md + prueba humo E2E (factura 001 + PDF + XML en producción) |
+| 2026-09-28 | A.3 ✅ Proyecto 2 completo: repo agendamiento-api (CI verde) + deploy Render agendamiento-api-jxfj.onrender.com con E2E verificado |
