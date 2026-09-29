@@ -74,13 +74,10 @@ Multi-stage: SDK build → runtime aspnet:10.0. Puerto 8080.
 ---
 
 ## Paso A.2 — Deploy público gratis
-- [ ] **A.2.1** API en Render (free): conectar repo, `Dockerfile` o build command `dotnet publish`. URL anotada aquí: `________`
-  - Preparado ✅ 2026-09-27: CORS configurable (`Cors:Origins` en appsettings, incluye `shadowwhite85.github.io`) + build OK — *falta cuenta de Render (requiere usuario)*
-- [ ] **A.2.2** Angular en GitHub Pages (`angular.json` base-href) o Cloudflare Pages. URL: `________`
-  - Workflow `deploy-pages.yml` listo ✅ (actionlint ok, build con base-href `/facturacion-app/` verificado) — *falta push + habilitar Pages en Settings → Pages → Source: GitHub Actions*
-- [ ] **A.2.3** `environment.prod.ts` apuntando a la API desplegada + rebuild + redeploy
-  - `environment.prod.ts` creado ✅ con URL provisional `https://facturacion-app.onrender.com/api` (confirmar nombre de servicio al crearlo en Render)
-- [ ] **A.2.4** README actualizado con links en vivo + credenciales demo
+- [x] **A.2.1** API en Render (free). URL: `https://facturacion-app-8c75.onrender.com` ✅ 2026-09-27 (Dockerfile, E2E login+CORS+seed verificado)
+- [x] **A.2.2** Angular en GitHub Pages. URL: `https://shadowwhite85.github.io/facturacion-app/` ✅ 2026-09-27 (deploy automático en cada push, Pages habilitado vía API)
+- [x] **A.2.3** `environment.prod.ts` apuntando a la API desplegada + rebuild + redeploy ✅ 2026-09-27 (URL real `facturacion-app-8c75.onrender.com`)
+- [x] **A.2.4** README actualizado con links en vivo + credenciales demo ✅ 2026-09-27
 
 ---
 
@@ -104,4 +101,6 @@ Portafolio con demo en vivo + video de 90 seg grabado (OBS) mostrando: login →
 | 2026-09-27 | A.1.6 ✅ EF Core Migrations (Inicial) + MigrateAsync + dotnet-ef local |
 | 2026-09-27 | A.1.7 ✅ Dockerfile multi-stage + .dockerignore (comandos validados sin Docker local) |
 | 2026-09-27 | A.1.8 ✅ GitHub Actions CI verificado en verde (run 36369654312) + badge |
-| 2026-09-27 | A.2 preparación ✅ CORS configurable + environment.prod.ts + workflow deploy-pages (pendiente: push, habilitar Pages, cuenta Render) |
+| 2026-09-27 | A.2.2 ✅ GitHub Pages en vivo: https://shadowwhite85.github.io/facturacion-app/ (deploy vía Actions) |
+| 2026-09-27 | A.2.1 ✅ API en Render (https://facturacion-app-8c75.onrender.com): login JWT + CORS + seed 5 productos E2E |
+| 2026-09-27 | A.2.3/A.2.4 ✅ environment.prod con URL real + README con links en vivo |

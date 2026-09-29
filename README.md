@@ -8,6 +8,16 @@ frontend en **Angular 22**.
 
 > Proyecto de portafolio — desarrollado en Riobamba, Ecuador 🇪🇨
 
+## 🌐 Demo en vivo
+
+| | URL |
+|---|---|
+| **Frontend (Angular)** | https://shadowwhite85.github.io/facturacion-app/ |
+| **API (.NET + Swagger)** | https://facturacion-app-8c75.onrender.com/swagger/index.html |
+
+*La API puede tardar ~50 s en despertar la primera vez (plan gratuito de Render).*
+
+
 ## ✨ Funcionalidades
 
 - **Productos e inventario:** CRUD completo con búsqueda, eliminación lógica y alerta de stock bajo
